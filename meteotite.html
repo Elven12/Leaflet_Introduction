@@ -38,6 +38,25 @@ function setup(){
   stroke(100);
 }
 
+function star(x, y, radius) {
+
+//code refer to https://p5js.org/examples/form-star.html
+  let angle = Math.PI * 2.0 / 5;
+  let halfAngle = angle / 2.0;
+  let halfRadius = radius/ 2.0;
+  beginShape();
+  for (var i = 0; i<5;i++){
+
+    var starX = x + cos(angle * i) * radius;
+    var starY = y + sin(angle * i) * radius;
+     vertex(starX, starY)
+     starX = x + cos(angle * i + halfAngle) * halfRadius;
+     starY = y + sin (angle * i + halfAngle) * halfRadius;
+     vertex (starX, starY)
+  }
+  endShape(CLOSE);
+}
+
 function draw(){
 }
 
@@ -57,7 +76,7 @@ function drawMeteorites() {
 
       let size = meteorites.getString(i, 'mass (g)');
       size = map(size, 558, 60000000, 1, 25) + myMap.zoom();
-      ellipse(pos.x, pos.y, size, size);
+      star(pos.x, pos.y, size);
     }
   }
 }
